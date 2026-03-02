@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #0d0d0d 70%);
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+}
+
+/* ── Phone Frame ── */
+.phone-frame {
+    width: 390px;
+    background: #000;
+    border-radius: 55px;
+    padding: 12px;
+    box-shadow:
+        0 0 0 1px #333,
+        0 40px 80px rgba(0,0,0,0.8),
+        inset 0 0 0 1px #1a1a1a;
+    position: relative;
+    overflow: hidden;
+}
+
+.notch {
+    width: 120px;
+    height: 34px;
+    background: #000;
+    border-radius: 0 0 20px 20px;
+    margin: 0 auto 8px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 0 0 1px #1a1a1a;
+}
+
+.home-bar {
+    width: 130px;
+    height: 5px;
+    background: #444;
+    border-radius: 3px;
+    margin: 12px auto 4px;
+}
+
+/* ── Calculator ── */
+.calculator {
+    background: #000;
+    border-radius: 44px;
+    overflow: hidden;
+    padding: 0 8px 8px;
+}
+
+/* ── Mode Tabs ── */
+.mode-tabs {
+    display: flex;
+    background: #1c1c1e;
+    border-radius: 12px;
+    padding: 3px;
+    margin: 8px 4px 12px;
+    gap: 3px;
+}
+
+.tab {
+    flex: 1;
+    padding: 8px 4px;
+    border: none;
+    background: transparent;
+    color: #888;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+}
+
+.tab.active {
+    background: #ff9f0a;
+    color: #000;
+    box-shadow: 0 2px 8px rgba(255,159,10,0.4);
+}
+
+/* ── Display ── */
+.display {
+    padding: 0 12px 16px;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.display-expression {
+    color: #888;
+    font-size: 18px;
+    font-weight: 300;
+    min-height: 26px;
+    word-break: break-all;
+    text-align: right;
+}
+
+.display-result {
+    color: #fff;
+    font-size: 70px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -2px;
+    transition: font-size 0.15s ease;
+    word-break: break-all;
+    text-align: right;
+}
+
+.display-result.error {
+    color: #ff453a;
+    font-size: 28px;
+}
+
+.display-result.small { font-size: 42px; }
+.display-result.xsmall { font-size: 28px; }
+
+/* ── Keys ── */
+.keypad { padding: 0 4px; }
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.key {
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 50%;
+    font-size: 26px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.1s, transform 0.08s;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.key:active { opacity: 0.7; transform: scale(0.94); }
+
+.key.func   { background: #a5a5a5; color: #000; }
+.key.num    { background: #333; color: #fff; }
+.key.op     { background: #ff9f0a; color: #fff; font-size: 28px; }
+.key.eq     { background: #ff9f0a; color: #fff; font-size: 28px; }
+.key.op.active-selected { background: #fff; color: #ff9f0a; }
+.key.disabled { background: #1c1c1e !important; cursor: default; }
+
+.key.wide {
+    grid-column: span 2;
+    border-radius: 40px;
+    justify-content: flex-start;
+    padding-left: 26px;
+    aspect-ratio: auto;
+}
+
+/* ── Trig Panel ── */
+.trig-panel {
+    padding: 4px 8px 12px;
+}
+
+.trig-label {
+    color: #888;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.trig-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.trig-fn {
+    background: #1c1c1e;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 12px;
+    padding: 10px 6px;
+    font-size: 15px;
+    font-style: italic;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Georgia', serif;
+}
+
+.trig-fn:hover  { background: #2c2c2e; }
+.trig-fn.active-trig {
+    background: #ff9f0a;
+    border-color: #ff9f0a;
+    color: #000;
+    box-shadow: 0 2px 10px rgba(255,159,10,0.4);
+}
+
+.hidden { display: none !important; }
+
+/* ── Ripple ── */
+.key::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    width: 0; height: 0;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, opacity 0.3s;
+    opacity: 0;
+}
+.key:active::after { width: 100%; height: 100%; opacity: 1; }

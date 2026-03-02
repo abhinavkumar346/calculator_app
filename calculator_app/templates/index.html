@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="notch"></div>
+
+        <div class="calculator">
+            <!-- Mode Tabs -->
+            <div class="mode-tabs">
+                <button class="tab active" data-mode="arithmetic">Arithmetic</button>
+                <button class="tab" data-mode="trig">Trig</button>
+                <button class="tab" data-mode="root">√ Root</button>
+            </div>
+
+            <!-- Display -->
+            <div class="display">
+                <div class="display-expression" id="expression"></div>
+                <div class="display-result" id="result">0</div>
+            </div>
+
+            <!-- ─── ARITHMETIC MODE ─── -->
+            <div class="keypad" id="mode-arithmetic">
+                <div class="keys">
+                    <!-- Row 1 -->
+                    <button class="key func" data-action="clear">AC</button>
+                    <button class="key func" data-action="toggle-sign">+/-</button>
+                    <button class="key func" data-action="percent">%</button>
+                    <button class="key op active-op" data-op="/">÷</button>
+                    <!-- Row 2 -->
+                    <button class="key num" data-num="7">7</button>
+                    <button class="key num" data-num="8">8</button>
+                    <button class="key num" data-num="9">9</button>
+                    <button class="key op" data-op="x">×</button>
+                    <!-- Row 3 -->
+                    <button class="key num" data-num="4">4</button>
+                    <button class="key num" data-num="5">5</button>
+                    <button class="key num" data-num="6">6</button>
+                    <button class="key op" data-op="-">−</button>
+                    <!-- Row 4 -->
+                    <button class="key num" data-num="1">1</button>
+                    <button class="key num" data-num="2">2</button>
+                    <button class="key num" data-num="3">3</button>
+                    <button class="key op" data-op="+">+</button>
+                    <!-- Row 5 -->
+                    <button class="key num wide" data-num="0">0</button>
+                    <button class="key num" data-num=".">.</button>
+                    <button class="key eq" data-action="equals">=</button>
+                </div>
+            </div>
+
+            <!-- ─── TRIG MODE ─── -->
+            <div class="keypad hidden" id="mode-trig">
+                <div class="trig-panel">
+                    <p class="trig-label">Select Function</p>
+                    <div class="trig-buttons">
+                        <button class="trig-fn active-trig" data-fn="sin">sin</button>
+                        <button class="trig-fn" data-fn="cos">cos</button>
+                        <button class="trig-fn" data-fn="tan">tan</button>
+                        <button class="trig-fn" data-fn="cosec">csc</button>
+                        <button class="trig-fn" data-fn="sec">sec</button>
+                        <button class="trig-fn" data-fn="cot">cot</button>
+                    </div>
+                    <p class="trig-label" style="margin-top:18px;">Enter Angle (degrees)</p>
+                </div>
+                <div class="keys">
+                    <button class="key func" data-action="trig-clear">AC</button>
+                    <button class="key func" data-action="trig-toggle-sign">+/-</button>
+                    <button class="key func disabled"></button>
+                    <button class="key op disabled"></button>
+
+                    <button class="key num" data-trig-num="7">7</button>
+                    <button class="key num" data-trig-num="8">8</button>
+                    <button class="key num" data-trig-num="9">9</button>
+                    <button class="key op disabled"></button>
+
+                    <button class="key num" data-trig-num="4">4</button>
+                    <button class="key num" data-trig-num="5">5</button>
+                    <button class="key num" data-trig-num="6">6</button>
+                    <button class="key op disabled"></button>
+
+                    <button class="key num" data-trig-num="1">1</button>
+                    <button class="key num" data-trig-num="2">2</button>
+                    <button class="key num" data-trig-num="3">3</button>
+                    <button class="key op disabled"></button>
+
+                    <button class="key num wide" data-trig-num="0">0</button>
+                    <button class="key num" data-trig-num=".">.</button>
+                    <button class="key eq" data-action="trig-calc">=</button>
+                </div>
+            </div>
+
+            <!-- ─── ROOT MODE ─── -->
+            <div class="keypad hidden" id="mode-root">
+                <div class="trig-panel">
+                    <p class="trig-label">Enter Number for √</p>
+                </div>
+                <div class="keys">
+                    <button class="key func" data-action="root-clear">AC</button>
+                    <button class="key func" data-action="root-toggle-sign">+/-</button>
+                    <button class="key func disabled"></button>
+                    <button class="key op disabled"></button>
+
+                    <button class="key num" data-root-num="7">7</button>
+                    <button class="key num" data-root-num="8">8</button>
+                    <button class="key num" data-root-num="9">9</button>
+                    <button class="key op disabled"></button>
+
+                    <button class="key num" data-root-num="4">4</button>
+                    <button class="key num" data-root-num="5">5</button>
+                    <button class="key num" data-root-num="6">6</button>
+                    <button class="key op disabled"></button>
+
+                    <button class="key num" data-root-num="1">1</button>
+                    <button class="key num" data-root-num="2">2</button>
+                    <button class="key num" data-root-num="3">3</button>
+                    <button class="key op disabled"></button>
+
+                    <button class="key num wide" data-root-num="0">0</button>
+                    <button class="key num" data-root-num=".">.</button>
+                    <button class="key eq" data-action="root-calc">=</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="home-bar"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/calculator.js') }}"></script>
+</body>
+</html>
